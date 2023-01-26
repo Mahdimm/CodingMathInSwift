@@ -18,17 +18,23 @@ struct First: View {
                     
                     ForEach(Array(0...100), id: \.self) { _ in
                         Path { path in
-                            let randWidth = Int.random(in: 1...Int(width))
-                            let randHeight = Int.random(in: 1...Int(height))
-                                                        
-                            path.move(to: CGPoint(x: randWidth, y: randHeight))
-                            path.addLine(to: CGPoint(x: Double(randWidth) * 0.5, y: Double(randHeight) * 0.5))
+                            
+                            let moveCoordinate = generateRandomNumber(width: width, height: height)
+                            path.move(to: CGPoint(x: moveCoordinate.x, y: moveCoordinate.y))
+                            
+                            let addLineCoordinate = generateRandomNumber(width: width, height: height)
+                            path.addLine(to: CGPoint(x: addLineCoordinate.x, y: addLineCoordinate.y))
+                            
                             path.closeSubpath()
                         }
-                        .stroke(.blue, lineWidth: 5)
+                        .stroke(.blue, lineWidth: 8)
                     }
                 }
             }
         }
+    }
+    
+    private func generateRandomNumber(width: Double, height: Double) -> (x: Double, y: Double) {
+        (x: Double.random(in: 1...width), y: Double.random(in: 1...height))
     }
 }
