@@ -11,7 +11,7 @@ import SwiftUI
 struct CodingMathApp: App {
     var body: some Scene {
         WindowGroup {
-            Second()
+            Third()
         }
     }
 }
