@@ -19,23 +19,19 @@ struct Third: View {
             let offset = height * 0.5
             let speed = calculateSpeed()
             var angle: CGFloat = 0
+            let baseRadius: CGFloat = 100
             
             ZStack(alignment: .center) {
                 ForEach(0..<speed.count, id: \.self) { index in
                     Path { path in
-                        let y = centerY + sin(angle) * offset
-                        
-                        print("Y: \(y) sinY: \(sin(angle)) angle: \(angle)")
-                        
-                        path.addArc(center: CGPoint(x: centerX, y: y), radius: 60, startAngle: Angle(radians: 0), endAngle: Angle(radians: Double.pi * 2), clockwise: false)
+                        let radius = baseRadius + sin(angle) * offset
+                                                
+                        path.addArc(center: CGPoint(x: centerX, y: centerY), radius: radius, startAngle: Angle(radians: 0), endAngle: Angle(radians: Double.pi * 2), clockwise: false)
                         
                         angle = speed[index]
                     }
                     .stroke(.blue, lineWidth: 1)
                 }
-            }
-            .onAppear {
-                print("***\n centerY: \(centerY) centerX:\(centerX) offset:\(offset)")
             }
         }
     }
